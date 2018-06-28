@@ -7,7 +7,7 @@ import com.example.thomas.androidarchitecture.dagger.DaggerApplicationComponent;
 
 public class ArchitectureApplication extends Application {
 
-    private ApplicationComponent applicationComponent;
+    private static ApplicationComponent applicationComponent;
 
     @Override
     public void onCreate() {
@@ -15,7 +15,7 @@ public class ArchitectureApplication extends Application {
         applicationComponent = DaggerApplicationComponent.builder().build();
     }
 
-    public ApplicationComponent getApplicationComponent() {
+    public static ApplicationComponent getApplicationComponent() {
         return applicationComponent;
     }
 }

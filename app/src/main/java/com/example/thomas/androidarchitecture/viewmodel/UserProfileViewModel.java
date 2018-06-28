@@ -34,7 +34,8 @@ public class UserProfileViewModel extends ViewModel {
     }
 
     public String getName() {
-        return user.getValue().getFirstName() + " " + user.getValue().getSurname();
+        return user.getValue().getLogin();
+        //return user.getValue().getFirstName() + " " + user.getValue().getSurname();
     }
 
 }

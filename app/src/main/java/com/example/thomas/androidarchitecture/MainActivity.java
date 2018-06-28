@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        UserProfileFragment fragment = UserProfileFragment.newInstance("testUserId");
+        UserProfileFragment fragment = UserProfileFragment.newInstance("beeftuck");
         displayFragment(fragment);
     }
 

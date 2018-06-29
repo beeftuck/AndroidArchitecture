@@ -2,9 +2,11 @@ package com.example.thomas.androidarchitecture.repository;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
+import android.util.Log;
 
 import com.example.thomas.androidarchitecture.ArchitectureApplication;
 import com.example.thomas.androidarchitecture.data.User;
+import com.example.thomas.androidarchitecture.data.dao.UserDao;
 import com.example.thomas.androidarchitecture.network.GithubWebService;
 
 import javax.inject.Inject;
@@ -18,6 +20,9 @@ public class UserRepositoryImplementation implements UserRepository {
     @Inject
     public GithubWebService githubWebService;
 
+    @Inject
+    public UserDao userDao;
+
     public UserRepositoryImplementation() {
         ArchitectureApplication.getApplicationComponent().inject(this);
     }
@@ -25,25 +30,32 @@ public class UserRepositoryImplementation implements UserRepository {
     @Override
     public LiveData<User> getUser(String userId) {
         // This is not an optimal implementation, we'll fix it below
-        final MutableLiveData<User> data = new MutableLiveData<>();
+        final LiveData<User> user = userDao.getByLogin(userId);
 
-//        User user = new User("Thomas", "Searle");
-//        data.setValue(user);
+        //TODO: Implement timeout
+        //TODO: Test that changes to user are published by LiveData
+        if (user == null || user.getValue() == null) {
+            githubWebService.getUser(userId).enqueue(new Callback<User>() {
+                @Override
+                public void onResponse(Call<User> call, final Response<User> response) {
+                    //TODO: Would it be better to use an async task here?
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            userDao.save(response.body());
+                        }
+                    }).start();
+                }
 
-        //TODO: Implement Retrofit
-        githubWebService.getUser(userId).enqueue(new Callback<User>() {
-            @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                data.setValue(response.body());
-            }
+                @Override
+                public void onFailure(Call<User> call, Throwable t) {
+                    Log.e("ERROR", t.getMessage());
+                    //TODO:
+                }
+            });
+        }
 
-            @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                //TODO:
-            }
-        });
-
-        return data;
+        return user;
     }
 
 }

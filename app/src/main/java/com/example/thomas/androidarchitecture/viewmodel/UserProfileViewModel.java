@@ -34,6 +34,11 @@ public class UserProfileViewModel extends ViewModel {
     }
 
     public String getName() {
+
+        if (user.getValue() == null) {
+            return "Pending";
+        }
+
         return user.getValue().getLogin();
         //return user.getValue().getFirstName() + " " + user.getValue().getSurname();
     }

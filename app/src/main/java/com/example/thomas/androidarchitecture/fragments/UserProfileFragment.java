@@ -59,7 +59,9 @@ public class UserProfileFragment extends Fragment {
         viewModel.getUser().observe(this, new Observer<User>() {
             @Override
             public void onChanged(@Nullable User user) {
-                //TODO: Update UI
+                if (user != null) {
+                    binding.txtUserName.setText(user.getLogin());
+                }
             }
         });
 

@@ -8,8 +8,8 @@ import javax.inject.Singleton;
 import dagger.Component;
 
 @Singleton
-@Component(modules = {RepositoriesModule.class, ViewModelModule.class, NetworkModule.class})
-public interface ApplicationComponent {
+@Component(modules = {ApplicationModule.class, NetworkModule.class, RepositoriesModule.class, RoomModule.class, ViewModelModule.class})
+public interface ApplicationComponent  {
 
     void inject(UserProfileFragment userProfileFragment);
 

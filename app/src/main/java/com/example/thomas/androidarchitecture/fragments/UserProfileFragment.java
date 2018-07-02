@@ -18,6 +18,9 @@ import com.example.thomas.androidarchitecture.databinding.UserProfileBinding;
 import com.example.thomas.androidarchitecture.viewmodel.UserProfileViewModel;
 import com.example.thomas.androidarchitecture.viewmodel.ViewModelFactory;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javax.inject.Inject;
 
 public class UserProfileFragment extends Fragment {
@@ -61,11 +64,22 @@ public class UserProfileFragment extends Fragment {
             public void onChanged(@Nullable User user) {
                 if (user != null) {
                     binding.txtUserName.setText(user.getLogin());
+
+                    //TODO: This is repeating what we do in with data binding calling the view model
+                    binding.txtLastUpdated.setText(user.getLastUpdated().toString());
                 }
             }
         });
 
         binding.setViewModel(viewModel);
+
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                viewModel.init("beeftuck");
+            }
+        }, 0, 10000);
     }
 
     @Nullable

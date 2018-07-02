@@ -12,6 +12,7 @@ public class User {
     @PrimaryKey
     private long id;
     private String login;
+    @ColumnInfo(name = "last_updated")
     private Date lastUpdated = new Date();
 
     public User() {

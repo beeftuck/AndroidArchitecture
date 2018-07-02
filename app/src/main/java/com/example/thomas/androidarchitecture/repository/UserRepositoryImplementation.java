@@ -9,6 +9,8 @@ import com.example.thomas.androidarchitecture.data.User;
 import com.example.thomas.androidarchitecture.data.dao.UserDao;
 import com.example.thomas.androidarchitecture.network.GithubWebService;
 
+import java.util.Date;
+
 import javax.inject.Inject;
 
 import retrofit2.Call;
@@ -28,9 +30,9 @@ public class UserRepositoryImplementation implements UserRepository {
     }
 
     @Override
-    public LiveData<User> getUser(String userId) {
+    public LiveData<User> getUser(final String userId) {
         // This is not an optimal implementation, we'll fix it below
-        final LiveData<User> user = userDao.getByLogin(userId);
+        final LiveData<User> user = userDao.getByLogin(userId, 5);
 
         //TODO: Implement timeout
         //TODO: Test that changes to user are published by LiveData
@@ -42,6 +44,7 @@ public class UserRepositoryImplementation implements UserRepository {
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
+                            response.body().setLastUpdated(new Date());
                             userDao.save(response.body());
                         }
                     }).start();

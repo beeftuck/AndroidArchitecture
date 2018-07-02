@@ -14,6 +14,6 @@ public interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void save(User user);
 
-    @Query("SELECT * FROM user WHERE login = :login")
-    LiveData<User> getByLogin(String login);
+    @Query("SELECT * FROM user WHERE login = :login AND last_updated >= :timeout")
+    LiveData<User> getByLogin(String login, int timeout);
 }

@@ -20,11 +20,11 @@ public class UserProfileViewModel extends ViewModel {
     }
 
     public void init(String userId) {
-        if (this.user != null) {
-            // ViewModel is created per Fragment so
-            // we know the userId won't change
-            return;
-        }
+//        if (this.user != null) {
+//            // ViewModel is created per Fragment so
+//            // we know the userId won't change
+//            return;
+//        }
 
         user = userRepository.getUser(userId);
     }
@@ -40,7 +40,14 @@ public class UserProfileViewModel extends ViewModel {
         }
 
         return user.getValue().getLogin();
-        //return user.getValue().getFirstName() + " " + user.getValue().getSurname();
+    }
+
+    public String getLastUpdated() {
+        if (user.getValue() == null) {
+            return "Unknown";
+        }
+
+        return user.getValue().getLastUpdated().toString();
     }
 
 }

@@ -7,7 +7,7 @@ import android.arch.persistence.room.TypeConverters;
 import com.example.thomas.androidarchitecture.data.converters.Converters;
 import com.example.thomas.androidarchitecture.data.dao.UserDao;
 
-@Database(entities = {User.class}, version = 1)
+@Database(entities = {User.class}, version = 2)
 @TypeConverters({Converters.class})
 public abstract class ArchitectureDatabase extends RoomDatabase {
     public abstract UserDao userDao();

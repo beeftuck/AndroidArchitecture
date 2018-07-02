@@ -5,6 +5,7 @@ import android.arch.persistence.room.Room;
 
 import com.example.thomas.androidarchitecture.data.ArchitectureDatabase;
 import com.example.thomas.androidarchitecture.data.dao.UserDao;
+import com.example.thomas.androidarchitecture.data.migrations.Migrations;
 
 import javax.inject.Singleton;
 
@@ -19,6 +20,7 @@ public abstract class RoomModule {
     static ArchitectureDatabase provideArchitectureDatabase(Application application) {
         return Room
                 .databaseBuilder(application.getApplicationContext(), ArchitectureDatabase.class, "Architecture-Database")
+                .addMigrations(Migrations.MIGRATION_1_TO_2)
                 .build();
     }
 

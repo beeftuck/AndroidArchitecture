@@ -15,5 +15,12 @@
             android:layout_height="wrap_content"
             android:text="@{viewModel.getName()}"/>
 
+        <TextView
+            android:id="@+id/txt_last_updated"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_user_name"
+            android:text="@{viewModel.getUser().getValue().getLastUpdated().toString()}"/>
+
     </RelativeLayout>
 </layout>

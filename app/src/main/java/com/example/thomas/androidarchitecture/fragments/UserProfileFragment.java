@@ -72,14 +72,6 @@ public class UserProfileFragment extends Fragment {
         });
 
         binding.setViewModel(viewModel);
-
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                viewModel.init("beeftuck");
-            }
-        }, 0, 10000);
     }
 
     @Nullable

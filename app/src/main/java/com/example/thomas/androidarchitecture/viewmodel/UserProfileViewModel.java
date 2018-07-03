@@ -3,6 +3,8 @@ package com.example.thomas.androidarchitecture.viewmodel;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.thomas.androidarchitecture.data.User;
 import com.example.thomas.androidarchitecture.repository.UserRepository;
@@ -48,6 +50,10 @@ public class UserProfileViewModel extends ViewModel {
         }
 
         return user.getValue().getLastUpdated().toString();
+    }
+
+    public void onGetUserDetailsClicked() {
+        init(user.getValue().getLogin());
     }
 
 }

@@ -34,7 +34,6 @@ public class UserRepositoryImplementation implements UserRepository {
         // This is not an optimal implementation, we'll fix it below
         final LiveData<User> user = userDao.getByLogin(userId, 5);
 
-        //TODO: Implement timeout
         //TODO: Test that changes to user are published by LiveData
         if (user == null || user.getValue() == null) {
             githubWebService.getUser(userId).enqueue(new Callback<User>() {

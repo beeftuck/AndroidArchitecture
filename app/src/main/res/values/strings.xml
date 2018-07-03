@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">AndroidArchitecture</string>
     <string name="title_activity_main">MainActivity</string>
+
+    <!-- UserProfileFragment -->
+    <string name="default_github_username">beeftuck</string>
+    <string name="btn_get_user_details">Get User Details</string>
+    <string name="lbl_username">Username:</string>
+    <string name="lbl_last_updated">Last Updated:</string>
 </resources>
